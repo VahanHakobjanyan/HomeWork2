@@ -7,6 +7,10 @@
         public string Address { get; set; }
         public Guid Id { get; set; }
 
+        public CustomerInput()
+        {
+
+        }
         public CustomerInput(string name, string surname, string address, Guid id)
         {
             Name = name;

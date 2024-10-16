@@ -6,7 +6,10 @@ namespace E_Commerce.DTOs
     {
         public string Name { get; set; }
         public Categories Category { get; set; }
-
+        public ProductOutput()
+        {
+            
+        }
         public ProductOutput(string name, Categories category)
         {
             Name = name;

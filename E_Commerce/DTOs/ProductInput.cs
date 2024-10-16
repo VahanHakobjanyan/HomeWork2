@@ -8,6 +8,11 @@ namespace E_Commerce.DTOs
         public Categories Category { get; set; }
         public Guid Id { get; set; }
 
+        public ProductInput()
+        {
+            
+        }
+
         public ProductInput(string name, Categories categories, Guid id)
         {
             Name = name;
