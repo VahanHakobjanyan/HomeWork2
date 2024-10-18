@@ -33,7 +33,11 @@ namespace E_Commerce
             }
 
             app.UseMiddleware<ExceptionHandlingMiddleware>();
-            app.UseMiddleware<ResponseTimeMiddleware>();
+            app.UseMiddleware<ResponseModifierMiddleware>();
+            app.UseMiddleware<LoggingMiddleware>();
+            app.UseMiddleware<ConditionalMiddleware>();
+           
+
 
             app.UseHttpsRedirection();
 

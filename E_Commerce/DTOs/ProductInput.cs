@@ -10,7 +10,7 @@ namespace E_Commerce.DTOs
 
         public ProductInput()
         {
-            
+
         }
 
         public ProductInput(string name, Categories categories, Guid id)

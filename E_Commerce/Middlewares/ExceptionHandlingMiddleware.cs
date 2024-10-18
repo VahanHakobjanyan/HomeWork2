@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Http.HttpResults;
+using System.Net;
+using System.Text.Json;
 
 namespace E_Commerce.Middlewares
 {
@@ -18,12 +20,24 @@ namespace E_Commerce.Middlewares
             {
                 await _next(context);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                Console.WriteLine("-----------------------------------");
-                Console.WriteLine("Exception: {0}", ex.Message);
-                Console.WriteLine("-----------------------------------");
+                Console.WriteLine("Status code: " + context.Response.StatusCode);
+                context.Response.Headers["Status code"] = context.Response.StatusCode.ToString();
+                var exception = new
+                {
+                    exceptionType = ex.GetType().ToString(),
+                    message = ex.Message,
+                    trace = ex.StackTrace,
+                    date = DateTime.Now,
+                };
+
+                var json = JsonSerializer.Serialize(exception); 
+                var desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+                var filePath = Path.Combine(desktopPath, $"ExceptionLog_{DateTime.UtcNow:yyyyMMdd_HHmmss}.json");
+                File.WriteAllText(filePath, json);
             }
         }
     }
 }
+
